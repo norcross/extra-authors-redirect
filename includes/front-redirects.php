@@ -39,7 +39,7 @@ function check_for_redirect_args() {
 		$author_id  = get_query_var( 'author' );
 
 		// Set up our single author redirect.
-		setup_single_redirect( $author_id, 'author' );
+		Helpers\setup_single_redirect( $author_id, 'author' );
 	}
 
 	// Run our bbPress forum member.
@@ -49,33 +49,11 @@ function check_for_redirect_args() {
 		$member_id  = get_query_var( 'author' );
 
 		// Set up our single author redirect.
-		setup_single_redirect( $member_id, 'member' );
+		Helpers\setup_single_redirect( $member_id, 'member' );
 	}
 
 	// Include the action.
 	do_action( Core\HOOK_KEY . 'after_template_redirects' );
-
-	// Nothing left. Return.
-	return;
-}
-
-/**
- * Redirect the single author archive pages.
- *
- * @param  integer $user_id    The user ID being done.
- * @param  string  $user_type  Which user type we're doing. Currently only used in the filter.
- *
- * @return void
- */
-function setup_single_redirect( $user_id = 0, $user_type = '' ) {
-
-	// Check for the meta flag with the location flag.
-	$maybe_send = Helpers\maybe_user_redirect( $user_id );
-
-	// Redirect if we have a value.
-	if ( ! empty( $maybe_send ) ) {
-		Helpers\redirect_on_request( $maybe_send, $user_type );
-	}
 
 	// Nothing left. Return.
 	return;

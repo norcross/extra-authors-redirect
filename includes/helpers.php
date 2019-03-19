@@ -36,6 +36,28 @@ function maybe_user_redirect( $user_id = 0 ) {
 }
 
 /**
+ * Redirect the single author archive pages.
+ *
+ * @param  integer $user_id    The user ID being done.
+ * @param  string  $user_type  Which user type we're doing. Currently only used in the filter.
+ *
+ * @return void
+ */
+function setup_single_redirect( $user_id = 0, $user_type = '' ) {
+
+	// Check for the meta flag with the location flag.
+	$maybe_send = Helpers\maybe_user_redirect( $user_id );
+
+	// Redirect if we have a value.
+	if ( ! empty( $maybe_send ) ) {
+		redirect_on_request( $maybe_send, $user_type );
+	}
+
+	// Nothing left. Return.
+	return;
+}
+
+/**
  * Do the actual redirect on request.
  *
  * @param  integer $user_id    The user ID we are checking.
