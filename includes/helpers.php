@@ -46,7 +46,7 @@ function maybe_user_redirect( $user_id = 0 ) {
 function setup_single_redirect( $user_id = 0, $user_type = '' ) {
 
 	// Check for the meta flag with the location flag.
-	$maybe_send = Helpers\maybe_user_redirect( $user_id );
+	$maybe_send = maybe_user_redirect( $user_id );
 
 	// Redirect if we have a value.
 	if ( ! empty( $maybe_send ) ) {

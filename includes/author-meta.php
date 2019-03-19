@@ -15,7 +15,7 @@ use ExtraAuthorsRedirect\Helpers as Helpers;
 /**
  * Start our engines.
  */
-add_action( 'personal_options', __NAMESPACE__ . '\display_profile_field', 20 );
+add_action( 'personal_options', __NAMESPACE__ . '\display_profile_field', 30 );
 add_action( 'personal_options_update', __NAMESPACE__ . '\save_user_meta' );
 add_action( 'edit_user_profile_update', __NAMESPACE__ . '\save_user_meta' );
 
