@@ -35,4 +35,4 @@ define( __NAMESPACE__ . '\NONCE_PREFIX', 'extr_athr_redrct_' );
 // Go and load our files.
 require_once __DIR__ . '/includes/helpers.php';
 require_once __DIR__ . '/includes/author-meta.php';
-require_once __DIR__ . '/front-redirects.php';
+require_once __DIR__ . '/includes/front-redirects.php';

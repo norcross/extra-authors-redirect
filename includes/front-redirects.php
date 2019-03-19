@@ -24,6 +24,11 @@ add_action( 'template_redirect', __NAMESPACE__ . '\check_for_redirect_args', 1 )
  */
 function check_for_redirect_args() {
 
+	// Never on admin, so bail right away.
+	if ( is_admin() ) {
+		return;
+	}
+
 	// Include the action.
 	do_action( Core\HOOK_KEY . 'before_template_redirects' );
 
