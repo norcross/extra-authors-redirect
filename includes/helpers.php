@@ -12,6 +12,20 @@ namespace ExtraAuthorsRedirect\Helpers;
 use ExtraAuthorsRedirect as Core;
 
 /**
+ * Check to see if the global option is enabled.
+ *
+ * @return boolean
+ */
+function maybe_set_global() {
+
+	// Check for the global option in the DB.
+	$global_option  = get_option( Core\OPTION_PREFIX . 'global', 0 );
+
+	// Return a false if it isn't set.
+	return ! empty( $global_option ) ? true : false;
+}
+
+/**
  * Check and see if a user account should be redirected.
  *
  * @param  integer $user_id  The user ID we are checking.
@@ -50,7 +64,7 @@ function setup_single_redirect( $user_id = 0, $user_type = '' ) {
 
 	// Redirect if we have a value.
 	if ( ! empty( $maybe_send ) ) {
-		redirect_on_request( $maybe_send, $user_type );
+		redirect_on_request( $user_id, $user_type );
 	}
 
 	// Nothing left. Return.
@@ -67,21 +81,16 @@ function setup_single_redirect( $user_id = 0, $user_type = '' ) {
  */
 function redirect_on_request( $user_id = 0, $user_type = 'author' ) {
 
-	// Make sure we have a user ID to check against.
-	if ( empty( $user_id ) && ! is_user_logged_in() ) {
-		return;
-	}
-
 	// Set my redirect URL.
 	$redirect_url   = apply_filters( Core\HOOK_KEY . 'redirect_url', home_url( '/' ), $user_id, $user_type );
-
-	// Set my status code.
-	$status_code    = apply_filters( Core\HOOK_KEY . 'redirect_status_code', 302, $user_id, $user_type );
 
 	// Make sure we have a URL from the resulting filter.
 	if ( empty( $redirect_url ) ) {
 		return;
 	}
+
+	// Set my status code.
+	$status_code    = apply_filters( Core\HOOK_KEY . 'redirect_status_code', 302, $user_id, $user_type );
 
 	// Redirect and bail.
 	wp_redirect( $redirect_url, $status_code );

@@ -29,11 +29,19 @@ function check_for_redirect_args() {
 		return;
 	}
 
+	// Check our setting.
+	$maybe_glbl = Helpers\maybe_set_global();
+
 	// Include the action.
 	do_action( Core\HOOK_KEY . 'before_template_redirects' );
 
 	// Check for author archive pages first.
 	if ( is_author() ) {
+
+		// Redirect right away if global is set.
+		if ( ! empty( $maybe_glbl ) ) {
+			Helpers\redirect_on_request( 0, 'author' );
+		}
 
 		// Get my author ID from the existing query vars.
 		$author_id  = get_query_var( 'author' );
@@ -44,6 +52,11 @@ function check_for_redirect_args() {
 
 	// Run our bbPress forum member.
 	if ( function_exists( 'is_bbpress' ) && bbp_is_single_user_profile() ) {
+
+		// Redirect right away if global is set.
+		if ( ! empty( $maybe_glbl ) ) {
+			Helpers\redirect_on_request( 0, 'member' );
+		}
 
 		// Get my author ID from the existing query vars.
 		$member_id  = get_query_var( 'author' );

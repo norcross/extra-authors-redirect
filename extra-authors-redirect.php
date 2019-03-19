@@ -30,9 +30,12 @@ define( __NAMESPACE__ . '\FILE', __FILE__ );
 // Define our various keys.
 define( __NAMESPACE__ . '\META_KEY', 'author_redirect' );
 define( __NAMESPACE__ . '\HOOK_KEY', 'extra_author_' );
+define( __NAMESPACE__ . '\OPTION_PREFIX', 'extr_athr_redrct_' );
 define( __NAMESPACE__ . '\NONCE_PREFIX', 'extr_athr_redrct_' );
 
 // Go and load our files.
-require_once __DIR__ . '/includes/helpers.php';
-require_once __DIR__ . '/includes/author-meta.php';
 require_once __DIR__ . '/includes/front-redirects.php';
+require_once __DIR__ . '/includes/helpers.php';
+require_once __DIR__ . '/includes/admin-settings.php';
+require_once __DIR__ . '/includes/author-meta.php';
+

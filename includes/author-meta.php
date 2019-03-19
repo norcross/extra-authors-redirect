@@ -28,8 +28,8 @@ add_action( 'edit_user_profile_update', __NAMESPACE__ . '\save_user_meta' );
  */
 function display_profile_field( $profileuser ) {
 
-	// First attempt to get the meta value.
-	$maybe_meta = Helpers\maybe_user_redirect( $profileuser->ID );
+	// Check our setting.
+	$maybe_glbl = Helpers\maybe_set_global();
 
 	// Wrap the table.
 	echo '<table class="form-table">';
@@ -47,13 +47,7 @@ function display_profile_field( $profileuser ) {
 			echo '<td>';
 
 				// Wrap it all up and show it.
-				echo '<label for="author_redirect">';
-					echo '<input type="checkbox" name="author_redirect" id="author_redirect" value="1" ' . checked( $maybe_meta, 1, false ) . ' /> ';
-					echo __( 'Redirect this author template page to the home page', 'extra-authors-redirect' );
-				echo '</label>';
-
-				// Include the nonce field.
-				echo wp_nonce_field( Core\NONCE_PREFIX . 'action', Core\NONCE_PREFIX . 'name', true, false );
+				echo false !== $maybe_glbl ? author_meta_disabled() : author_meta_checkbox( $profileuser->ID );
 
 			// Close the checkbox.
 			echo '</td>';
@@ -66,6 +60,43 @@ function display_profile_field( $profileuser ) {
 
 	// Close up the table.
 	echo '</table>';
+}
+
+/**
+ * Set up the checkbox field for the single authors.
+ *
+ * @return HTML
+ */
+function author_meta_checkbox( $user_id = 0 ) {
+
+	// First attempt to get the meta value.
+	$maybe_meta = Helpers\maybe_user_redirect( $user_id );
+
+	// Set my empty.
+	$field  = '';
+
+	// Wrap it all up and show it.
+	$field .= '<label for="author_redirect">';
+		$field .= '<input type="checkbox" name="author_redirect" id="author_redirect" value="1" ' . checked( $maybe_meta, 1, false ) . ' /> ';
+		$field .= __( 'Redirect this author template page to the home page', 'extra-authors-redirect' );
+	$field .= '</label>';
+
+	// Include the nonce field.
+	$field .= wp_nonce_field( Core\NONCE_PREFIX . 'action', Core\NONCE_PREFIX . 'name', true, false );
+
+	// Return my field.
+	return $field;
+}
+
+/**
+ * Set up the checkbox field for the disabled.
+ *
+ * @return HTML
+ */
+function author_meta_disabled() {
+
+	// Return the paragraph.
+	return '<p class="description">' . __( 'This has been enabled globally by the site administrator.', 'extra-authors-redirect' ) . '</p>';
 }
 
 /**
