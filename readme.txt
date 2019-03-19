@@ -1,12 +1,12 @@
 === Extra Authors Redirect ===
-Contributors: norcross, jjeaton, reaktivstudios
+Contributors: norcross
 Website Link: http://andrewnorcross.com/plugins/
-Donate link: https://andrewnorcross.com/donate
+Donate link: http://andrewnorcross.com/donate
 Tags: author-page, authors, redirects
 Requires at least: 3.3
 Tested up to: 3.9
 Stable tag: 1.2
-License: GPLv2 or later
+License: MIT
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Adds a checkbox to author profiles for redirecting to other parts of the site.
