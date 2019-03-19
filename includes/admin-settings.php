@@ -24,8 +24,18 @@ add_action( 'admin_init', __NAMESPACE__ . '\load_settings' );
  */
 function load_settings() {
 
+	// Set the args for my settings page.
+    $setup_args = array(
+        'type'              => 'boolean',
+        'group'             => 'general',
+        'description'       => '',
+        'sanitize_callback' => 'absint',
+        'show_in_rest'      => true,
+        'default'           => 0,
+    );
+
 	// Add our global setting checkbox into the general settings.
-	register_setting( 'general', Core\OPTION_PREFIX . 'global', __NAMESPACE__ . '\sanitize' );
+	register_setting( 'general', Core\OPTION_PREFIX . 'global', $setup_args );
 
 	// Load the checkbox field.
 	add_settings_field( 'enable-global', __( 'Author Archive Redirects', 'extra-authors-redirect' ), __NAMESPACE__ . '\global_field', 'general', 'default' );
@@ -63,15 +73,4 @@ function global_field() {
 
 	// Close out the fieldset.
 	echo '</fieldset>';
-}
-
-/**
- * Sanitize the user data list inputs (exclusion and local).
- *
- * @param  string $input  The data entered in a settings field.
- *
- * @return string $input  The exclude list sanitized.
- */
-function sanitize( $input ) {
-	return absint( $input );
 }
