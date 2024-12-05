@@ -61,10 +61,10 @@ function maybe_redirect_author_profile() {
 	}
 
 	// Get the redirect URL.
-	$fetch_redirect = Helpers\get_author_redirect_url();
+	$fetch_redirect = Helpers\get_author_redirect_url( $get_author_id );
 
 	// And redirect.
-	wp_safe_redirect( esc_url( $fetch_redirect ), Helpers\get_author_redirect_http_code() );
+	wp_safe_redirect( esc_url( $fetch_redirect ), Helpers\get_author_redirect_http_code( $get_author_id ) );
 	exit();
 }
 
@@ -116,9 +116,9 @@ function maybe_redirect_forum_profile() {
 	}
 
 	// Get the redirect URL.
-	$fetch_redirect = Helpers\get_author_redirect_url();
+	$fetch_redirect = Helpers\get_author_redirect_url( $get_author_id );
 
 	// And redirect.
-	wp_safe_redirect( esc_url( $fetch_redirect ), Helpers\get_author_redirect_http_code() );
+	wp_safe_redirect( esc_url( $fetch_redirect ), Helpers\get_author_redirect_http_code( $get_author_id ) );
 	exit();
 }
