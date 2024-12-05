@@ -46,7 +46,7 @@ function show_user_meta_setting( $profileuser ) {
 
 			// Handle the markup like core does.
 			echo '<label for="' . esc_attr( Core\UMETA_KEY ) . '">';
-				echo '<input name="' . esc_attr( Core\UMETA_KEY ) . '" type="checkbox" id="' . esc_attr( Core\UMETA_KEY ) . '" value="yes" ' . checked( 'yes', $maybe_enabled, false ) . '> ' . esc_html__( 'Redirect this author profile.', 'extra-authors-redirect' );
+				echo '<input name="' . esc_attr( Core\UMETA_KEY ) . '" type="checkbox" id="' . esc_attr( Core\UMETA_KEY ) . '" value="yes" ' . checked( 'yes', $maybe_enabled, false ) . '> ' . esc_html__( 'Redirect this author profile', 'extra-authors-redirect' );
 			echo '</label>';
 
 			// And add a nonce field.

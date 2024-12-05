@@ -1,4 +1,7 @@
 
+#### Version 2.1.0 - 2024/12/05
+* Adding ability to set a redirect on a per-user basis
+
 #### Version 2.0.0 - 2024/11/18
 * total rewrite because the previous version was ugly
 
