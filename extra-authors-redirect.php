@@ -7,7 +7,7 @@
  * Author URI:      https://andrewnorcross.com
  * Text Domain:     extra-authors-redirect
  * Domain Path:     /languages
- * Version:         2.0.0
+ * Version:         2.1.0
  *
  * @package         ExtraAuthorsRedirect
  */
@@ -19,7 +19,7 @@ namespace Norcross\ExtraAuthorsRedirect;
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Define our version.
-define( __NAMESPACE__ . '\VERS', '2.0.0' );
+define( __NAMESPACE__ . '\VERS', '2.1.0' );
 
 // Plugin root file.
 define( __NAMESPACE__ . '\FILE', __FILE__ );
