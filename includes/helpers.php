@@ -56,7 +56,7 @@ function check_global_enable( $return_type = 'string' ) {
 /**
  * Check the setting to see if we have enabled it for a single user.
  *
- * @param  integer $user_id      The individual user ID we are checking..
+ * @param  integer $user_id      The individual user ID we are checking.
  * @param  string  $return_type  How to return the option. Accepts "boolean" or "string".
  *
  * @return mixed
@@ -101,17 +101,21 @@ function check_user_enable( $user_id = 0, $return_type = 'string' ) {
 /**
  * Get the URL that we need to redirect to.
  *
+ * @param  integer $user_id  The individual user ID we are checking.
+ *
  * @return string
  */
-function get_author_redirect_url() {
-	return apply_filters( Core\HOOK_PREFIX . 'redirect_url', home_url( '/' ) );
+function get_author_redirect_url( $user_id = 0 ) {
+	return apply_filters( Core\HOOK_PREFIX . 'redirect_url', home_url( '/' ), $user_id );
 }
 
 /**
  * Get the HTTP status code that we need to use.
  *
+ * @param  integer $user_id  The individual user ID we are checking.
+ *
  * @return string
  */
-function get_author_redirect_http_code() {
-	return apply_filters( Core\HOOK_PREFIX . 'redirect_http_code', 301 );
+function get_author_redirect_http_code( $user_id = 0 ) {
+	return apply_filters( Core\HOOK_PREFIX . 'redirect_http_code', 301, $user_id );
 }
