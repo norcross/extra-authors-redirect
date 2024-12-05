@@ -32,6 +32,9 @@ function show_user_meta_setting( $profileuser ) {
 		return;
 	}
 
+	// See if this is enabled globally.
+	$maybe_global   = Helpers\check_global_enable();
+
 	// Check the user meta.
 	$maybe_enabled  = Helpers\check_user_enable( $profileuser->ID );
 
@@ -44,13 +47,22 @@ function show_user_meta_setting( $profileuser ) {
 		// Show the checkbox portion.
 		echo '<td>';
 
-			// Handle the markup like core does.
+			// Begin with a label setup.
 			echo '<label for="' . esc_attr( Core\UMETA_KEY ) . '">';
+
+				// The actual checkbox.
 				echo '<input name="' . esc_attr( Core\UMETA_KEY ) . '" type="checkbox" id="' . esc_attr( Core\UMETA_KEY ) . '" value="yes" ' . checked( 'yes', $maybe_enabled, false ) . '> ' . esc_html__( 'Redirect this author profile', 'extra-authors-redirect' );
+
+			// Close the label.
 			echo '</label>';
 
 			// And add a nonce field.
 			wp_nonce_field( 'exar_user_action', 'exar-user-meta-save', false );
+
+			// Include a message for global settings.
+			if ( 'yes' === $maybe_global ) {
+				echo '<p class="description"><em>' . esc_html__( 'Note: This setting will be ignored, as all authors are currently set to redirect.', 'extra-authors-redirect' ) . '</em></p>';
+			}
 
 		// Close the checkbox portion.
 		echo '</td>';
